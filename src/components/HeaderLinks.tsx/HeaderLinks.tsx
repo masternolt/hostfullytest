@@ -15,7 +15,7 @@ export const HeaderLinks: React.FC = ({}) => {
         </Link>
       </li>
       <li>
-        <Link href={"/bookings"} className={styles.link}>
+        <Link href={"/mybookings"} className={styles.link}>
           My bookings
         </Link>
       </li>

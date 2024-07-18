@@ -9,6 +9,7 @@ export const initialPropertiesData: Property[] = [
     rating: 8.9,
     distanceFromCentre: 4.5,
     city: 'Rio de janeiro',
+    bookings: [],
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const initialPropertiesData: Property[] = [
     rating: 8.9,
     distanceFromCentre: 4.5,
     city: 'Rio de janeiro',
+    bookings: [],
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ export const initialPropertiesData: Property[] = [
     rating: 8.9,
     distanceFromCentre: 4.5,
     city: 'Rio de janeiro',
+    bookings: [],
   },
   {
     id: 4,
@@ -36,5 +39,6 @@ export const initialPropertiesData: Property[] = [
     rating: 8.9,
     distanceFromCentre: 4.5,
     city: 'Rio de janeiro',
+    bookings: [],
   }
 ]
