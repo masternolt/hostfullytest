@@ -5,8 +5,9 @@ export default function Mybookings() {
   const getPropertiesWithBookings = usePropertyBookings(
     (state) => state.getPropertiesWithBookings
   );
-  const bookedProperties = getPropertiesWithBookings();
-  console.log(bookedProperties);
+  const properties = usePropertyBookings((state) => state.properties);
+
+  const propertiesWithBookings = getPropertiesWithBookings(properties);
 
   const styles = {
     container: "flex flex-col",
@@ -14,9 +15,9 @@ export default function Mybookings() {
 
   return (
     <div className="container">
-      {bookedProperties && bookedProperties?.length > 0 ? (
+      {propertiesWithBookings && propertiesWithBookings?.length > 0 ? (
         <div className={styles.container}>
-          {bookedProperties.map((item, index) => {
+          {propertiesWithBookings.map((item, index) => {
             return <BookedProperty property={item} key={index} />;
           })}
         </div>

@@ -16,23 +16,23 @@ export type RangeDates = {
 
 export const BookedProperty: React.FC<BookedProps> = ({ property }) => {
   const deleteBooking = usePropertyBookings((state) => state.deleteBooking);
-  const router = useRouter();
 
   const styles = {
     container: "flex flex-col",
     heading: "font-semibold text-3xl mb-3",
+    bookingsContainer: "flex flex-col gap-7",
     bookings: "flex justify-between",
   };
 
   const onDeleteBooking = (propertyId: number, bookingId: string) => {
     deleteBooking(propertyId, bookingId);
-    router.reload();
+    alert("Booking sucessfully deleted");
   };
 
   return (
     <div>
       <h1 className={styles.heading}>You bookings at: {property.title}</h1>
-      <div>
+      <div className={styles.bookingsContainer}>
         {property.bookings.map((booking, index) => {
           return (
             <div

@@ -4,6 +4,7 @@ import { Property } from "@/types/property";
 import { Booking } from "@/types/booking";
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
+import { produce } from "immer";
 
 // Provinding mock data that could be a fetch from a service
 const initialData = {
@@ -18,7 +19,7 @@ export type PropertyState = {
   createOrUpdateBooking: (propertyId: number, startDate: Date, endDate: Date, bookingId?: string) => void;
   deleteBooking: (propertyId: number, bookingId: string) => void;
   hasOverlapedBookings:( bookings: Booking[], startDate: Date, endDate: Date) => Boolean;
-  getPropertiesWithBookings:() => Property[] | undefined;
+  getPropertiesWithBookings:(properties: Property[]) => Property[] | undefined;
 }
 
 export const usePropertyBookings = create<PropertyState>((set, get) => ({
@@ -83,7 +84,7 @@ export const usePropertyBookings = create<PropertyState>((set, get) => ({
 
   },
   deleteBooking(propertyId, bookingId) {
-    const { getProperty } = get();
+    const { getProperty, properties } = get();
     const property = getProperty(propertyId);
 
     if (!property) {
@@ -91,26 +92,21 @@ export const usePropertyBookings = create<PropertyState>((set, get) => ({
     }
 
     set((state) => ({
-      properties: state.properties.map((mapProperty) => {
-        if (mapProperty.id === propertyId) {
-          const filteredArray = mapProperty.bookings.filter(item => item.id === bookingId);
-          return ({
-            ...mapProperty,
-            bookings: filteredArray
-          })
+      properties: properties.map((property) => {
+        if(property.id === propertyId) {
+          property.bookings = property.bookings.filter(item => item.id !== bookingId)
         }
-        return mapProperty
-      }
-      ),
-    }));
+        return property
+      })
+    }))
+
   },
   hasOverlapedBookings(bookings, startDate, endDate) {
     return bookings.every((booking) => {
       return moment(startDate).isBetween(booking.startDate, booking.endDate) || moment(endDate).isBetween(booking.startDate, booking.endDate);
     })
   },
-  getPropertiesWithBookings() {
-    const { properties } = get();
+  getPropertiesWithBookings(properties) {
 
     return properties.filter((item) => {
       return item.bookings.length > 0

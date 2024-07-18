@@ -30,7 +30,6 @@ export const EditBooking: React.FC<EditBookingProps> = ({
   const createOrUpdateBooking = usePropertyBookings(
     (state) => state.createOrUpdateBooking
   );
-  const router = useRouter();
 
   const editBooking = (propertyId: number, bookingId: string) => {
     const selectedDates = selectedRange;
@@ -44,7 +43,6 @@ export const EditBooking: React.FC<EditBookingProps> = ({
       try {
         createOrUpdateBooking(propertyId, startDate, endDate, bookingId);
         alert("Booking edit sucessfull!");
-        router.reload();
       } catch (error) {
         alert(error);
         setSelectedRange(bookedDates);
