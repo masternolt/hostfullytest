@@ -16,8 +16,6 @@ export const PropertyList: React.FC = ({}) => {
     bookActions: "flex flex-col gap-2 self-end",
   };
 
-  console.log(properties);
-
   return (
     <div className={styles.container}>
       {properties.map((property, index) => {

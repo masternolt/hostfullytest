@@ -73,7 +73,7 @@ export const Property: React.FC<PropertyProps> = ({ property }) => {
   };
 
   return (
-    <div className={styles.property}>
+    <div className={styles.property} data-testid="property">
       <Image
         src={property.imageUrl}
         alt={property.title}
